@@ -1,9 +1,9 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as isDev from "electron-is-dev";
 import * as path from "path";
-import * as os from "os";
-import * as fs from "fs";
-import { newPost } from "./utils/encrypt";
+import newPost from "./utils/encrypt";
+import { decrypt } from "./utils/decrypt";
+import { dbClose, dbInit } from "./utils/dbConnect";
 
 let mainWindow: BrowserWindow;
 
@@ -48,36 +48,40 @@ const createWindow = () => {
 app.on("ready", createWindow);
 
 // Quit when all windows are closed.
-app.on("window-all-closed", () => {
+app.on("window-all-closed", async () => {
+  await dbClose();
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
 app.on("activate", () => {
+  dbInit();
   if (mainWindow === null) {
     createWindow();
   }
 });
 
-fs.readdir(os.homedir(), (err, result) => {
-  if (err) return console.error(err.message);
-  if (!result.includes("pw-data.db")) {
-    fs.mkdir(path.join(os.homedir(), "pw-data.db"), (err) => {
-      if (err) console.error(err.message);
-    });
-  }
-});
+// fs.readdir(os.homedir(), (err, result) => {
+//   if (err) return console.error(err.message);
+//   if (!result.includes("pwdata.db")) {
+//     fs.mkdir(path.join(os.homedir(), "pwdata.db"), (err) => {
+//       if (err) console.error(err.message);
+//     });
+//   }
+// });
 
 ipcMain.handle("encrypt", async (e, data) => {
   try {
     const result = await newPost(data);
-    console.log(result);
     return result;
   } catch (e) {
-    console.log(e);
     return e;
   }
 });
 
-ipcMain.handle("getData", async (e, password) => {});
+ipcMain.handle("decrypt", async (e, password) => {
+  const result = await decrypt(password);
+  console.log(result);
+  return result;
+});

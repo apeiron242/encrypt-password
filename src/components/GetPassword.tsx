@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
-  verification: (e: React.FormEvent) => void;
+  verification: (tempPassword: string) => (e: React.FormEvent) => void;
 }
 
-const GetPassword: React.FC<Props> = ({ setPassword, verification }) => {
+const GetPassword: React.FC<Props> = ({ verification }) => {
+  const [password, setPassword] = useState<string>("");
   return (
-    <form className="verification-form" onSubmit={verification}>
+    <form className="verification-form" onSubmit={verification(password)}>
       <label htmlFor="">Write Your Password</label>
       <input
         type="password"

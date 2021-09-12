@@ -21,9 +21,14 @@ const App: React.FC = () => {
   const viewNewPasswordBtnRef = useRef<HTMLButtonElement>(null);
   const viewPMListBtnRef = useRef<HTMLButtonElement>(null);
 
-  const verification = (e: React.FormEvent) => {
+  const verification = (tempPassword: string) => (e: React.FormEvent) => {
     e.preventDefault();
     setIsVerified(true);
+    setPassword(tempPassword);
+    ipcRenderer.invoke("decrypt", password).then((result: DataInterface[]) => {
+      alert(result);
+      setData(result);
+    });
   };
 
   const newPost = async (e: React.FormEvent) => {
@@ -62,21 +67,11 @@ const App: React.FC = () => {
     viewPMListBtnRef.current?.classList.toggle("button-active");
   };
 
-  useEffect(() => {
-    if (isVerified) {
-      ipcRenderer
-        .invoke("getData", password)
-        .then((result: DataInterface[]) => {
-          setData(result);
-        });
-    }
-  }, [isVerified]);
-
   return (
     <div className="App">
       <Header />
       <main>
-        <GetPassword setPassword={setPassword} verification={verification} />
+        <GetPassword verification={verification} />
         {isVerified ? (
           <div className="display-btn">
             <button onClick={setViewNewPassword} ref={viewNewPasswordBtnRef}>

@@ -1,28 +1,28 @@
 import { EncryptionInterface } from "./interfaces";
-import db from "./dbConnect";
+import db, { dbClose } from "./dbConnect";
 import * as bcrypt from "bcrypt";
 import * as CryptoJs from "crypto-js";
 
 const saltRounds = 10;
 
-export const newPost = async (data: EncryptionInterface) => {
+const newPost = async (data: EncryptionInterface) => {
   try {
-    data = await encryptDataPassword(data);
-    db.run(
-      `INSERT INTO PW(sitename, username, password) VALUES(?,?,?)`,
-      [data.siteName, data.username, data.password],
-      (err) => {
-        return err;
-      }
-    );
+    const { sitename, username, password } = await encryptDataPassword(data);
 
-    return "ok";
+    db.serialize(async () => {
+      const stmt = db.prepare(
+        `INSERT INTO pw (sitename, username, password) VALUES (?,?,?)`
+      );
+      stmt.run([sitename, username, password]);
+    });
   } catch (error) {
+    console.log(error);
     return error;
   }
+  return "ok";
 };
 
-const encryptUserPassword = async (password: string) => {
+export const encryptUserPassword = async (password: string) => {
   const hash = await bcrypt.hash(password, saltRounds);
   return hash;
 };
@@ -34,10 +34,12 @@ const encryptDataPassword = async (data: EncryptionInterface) => {
     userPasswordHash
   ).toString();
 
-  data = {
-    siteName: data.siteName,
+  const newData = {
+    sitename: data.sitename,
     username: data.username,
     password: passwordHash,
   };
-  return data;
+  return newData;
 };
+
+export default newPost;

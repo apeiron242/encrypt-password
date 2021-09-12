@@ -2,24 +2,26 @@ import * as sqlite3 from "sqlite3";
 import * as os from "os";
 import * as path from "path";
 
-const db = new sqlite3.Database(
-  path.join(os.homedir(), "pw-data.db"),
-  (err) => {
-    if (err) return console.error(err.message);
-  }
-);
+sqlite3.verbose();
 
-db.serialize(() => {
-  db.run(`CREATE TABLE IF NOT EXISTS PW (
-    id INTEGER PRIMARY KEY NOT NULL UNIQUE,
-    sitename TEXT NOT NULL,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL
-  )`);
-});
+const db = new sqlite3.Database(path.join(os.homedir(), "pwdata.db"));
 
-db.close((err) => {
-  if (err) return console.error(err.message);
-});
+export const dbInit = async () => {
+  db.serialize(async () => {
+    db.run(`CREATE TABLE IF NOT EXISTS pw (
+      id INTEGER PRIMARY KEY NOT NULL UNIQUE,
+      sitename TEXT NOT NULL,
+      username TEXT NOT NULL,
+      password TEXT NOT NULL
+    )`);
+  });
+};
+
+export const dbClose = (): Promise<void> => {
+  return new Promise((resolve) => {
+    db.close();
+    resolve();
+  });
+};
 
 export default db;
