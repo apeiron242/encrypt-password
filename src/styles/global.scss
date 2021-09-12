@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+@import "utils/reset";
+@import "utils/variables";
+@import "utils/mediaQuery";
+
+body {
+  background-color: rgb(56, 55, 55);
+  color: $text-color;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: $base-text-size-md;
+}
+
+input {
+  width: 30%;
+  height: 1.5rem;
+  padding-left: 0.3rem;
+  @include md {
+    width: 70%;
+  }
+  border: none;
+}
+
+button {
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  background-color: rgb(57, 57, 233);
+  color: $text-color;
+
+  &:hover {
+    background-color: rgb(179, 177, 177);
+    color: black;
+  }
+}
+
+header {
+  border-bottom: 1px solid gray;
+  padding: $base-padding-md;
+
+  h1 {
+    font-size: $base-text-size-lg;
+  }
+}
+
+main {
+  margin-top: $base-padding-md;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: $base-padding-md;
+}
+
+.new-password-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  form {
+    width: 70%;
+    @include md {
+      width: 80%;
+    }
+    border: 1px solid gray;
+    padding: $base-padding-md;
+  }
+
+  input {
+    width: 80%;
+  }
+}
+
+.display-btn {
+  margin: $base-padding-md;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: $base-padding-md;
+
+  button {
+    background-color: rgb(179, 177, 177);
+    color: black;
+
+    &:hover {
+      background-color: rgb(189, 13, 13);
+      color: $text-color;
+    }
+  }
+
+  .button-active {
+    background-color: rgb(189, 13, 13);
+    color: $text-color;
+  }
+}
+
+.cards {
+  margin-top: $base-padding-md * 1.5;
+  display: flex;
+  justify-content: center;
+
+  @include md {
+    flex-direction: column;
+  }
+
+  div {
+    width: 100%;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.view-PM {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  div {
+    width: 70%;
+    @include md {
+      width: 80%;
+    }
+    border: 1px solid gray;
+    padding: $base-padding-md;
+  }
+}
