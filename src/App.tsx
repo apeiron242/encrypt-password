@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "./pages/Main";
 import HowTo from "./pages/HowTo";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import "./styles/global.scss";
 
