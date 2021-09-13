@@ -17,6 +17,7 @@ const createWindow = () => {
     resizable: true,
     fullscreen: false,
     fullscreenable: true,
+    icon: path.join(__dirname, "build", "assets", "icon.png"),
     webPreferences: {
       nodeIntegration: true,
       devTools: isDev,
