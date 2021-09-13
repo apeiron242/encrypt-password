@@ -10,6 +10,14 @@ body {
   font-size: $base-text-size-md;
 }
 
+a {
+  text-decoration: none;
+  color: $text-color;
+  &:hover {
+    color: rgb(134, 134, 240);
+  }
+}
+
 input {
   width: 30%;
   height: 1.5rem;
@@ -37,9 +45,15 @@ button {
 header {
   border-bottom: 1px solid gray;
   padding: $base-padding-md;
+  display: flex;
 
   h1 {
     font-size: $base-text-size-lg;
+  }
+
+  h2 {
+    position: absolute;
+    right: 20px;
   }
 }
 
@@ -133,5 +147,70 @@ form {
     }
     border: 1px solid gray;
     padding: $base-padding-md;
+    margin-bottom: $base-padding-md;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      font-size: $base-text-size-lg * 1.5;
+      margin-bottom: $base-padding-md * 1.5;
+    }
+
+    p {
+      margin-bottom: $base-padding-md;
+      align-self: flex-start;
+
+      span {
+        color: yellow;
+        padding-left: 0.5rem;
+      }
+    }
+
+    .password {
+      cursor: pointer;
+      span {
+        color: rgb(228, 170, 170);
+      }
+    }
+
+    button {
+      background-color: transparent;
+      color: rgb(240, 59, 59);
+      font-size: $base-text-size-lg;
+      padding: 0;
+    }
+  }
+}
+
+.info {
+  text-align: center;
+}
+
+.howto {
+  margin-top: $base-padding-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div {
+    padding: $base-padding-md;
+    width: 90%;
+    border: 1px solid gray;
+    margin-bottom: $base-padding-md;
+
+    h2 {
+      text-align: center;
+      padding-bottom: $base-padding-md;
+      font-size: $base-text-size-lg;
+    }
+
+    li {
+      padding: 0.5rem;
+      margin-left: $base-padding-md;
+      list-style-type: lower-roman;
+      line-height: 1.5rem;
+    }
   }
 }

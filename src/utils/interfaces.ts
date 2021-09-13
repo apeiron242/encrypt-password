@@ -1,7 +1,7 @@
 export interface DataInterface {
   id?: string;
   userPassword?: string;
-  siteName: string;
+  sitename: string;
   username: string;
   password: string;
 }

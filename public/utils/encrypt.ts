@@ -1,13 +1,10 @@
 import { EncryptionInterface } from "./interfaces";
-import db, { dbClose } from "./dbConnect";
-import * as bcrypt from "bcrypt";
+import db from "./dbConnect";
 import * as CryptoJs from "crypto-js";
-
-const saltRounds = 10;
 
 const newPost = async (data: EncryptionInterface) => {
   try {
-    const { sitename, username, password } = await encryptDataPassword(data);
+    const { sitename, username, password } = await encryptData(data);
 
     db.serialize(async () => {
       const stmt = db.prepare(
@@ -23,12 +20,16 @@ const newPost = async (data: EncryptionInterface) => {
 };
 
 export const encryptUserPassword = async (password: string) => {
-  const hash = await bcrypt.hash(password, saltRounds);
-  return hash;
+  const hash = CryptoJs.SHA256(password);
+  return hash.toString();
 };
 
-const encryptDataPassword = async (data: EncryptionInterface) => {
+const encryptData = async (data: EncryptionInterface) => {
   const userPasswordHash = await encryptUserPassword(data.userPassword);
+  const usernameHash = CryptoJs.AES.encrypt(
+    data.username,
+    userPasswordHash
+  ).toString();
   const passwordHash = CryptoJs.AES.encrypt(
     data.password,
     userPasswordHash
@@ -36,7 +37,7 @@ const encryptDataPassword = async (data: EncryptionInterface) => {
 
   const newData = {
     sitename: data.sitename,
-    username: data.username,
+    username: usernameHash,
     password: passwordHash,
   };
   return newData;

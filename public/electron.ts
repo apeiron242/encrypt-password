@@ -2,8 +2,9 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import * as isDev from "electron-is-dev";
 import * as path from "path";
 import newPost from "./utils/encrypt";
-import { decrypt } from "./utils/decrypt";
+import decrypt from "./utils/decrypt";
 import { dbClose, dbInit } from "./utils/dbConnect";
+import deletePost from "./utils/deletePost";
 
 let mainWindow: BrowserWindow;
 
@@ -31,6 +32,8 @@ const createWindow = () => {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
+  dbInit();
+
   if (isDev) {
     mainWindow.webContents.openDevTools({ mode: "detach" });
   }
@@ -56,20 +59,10 @@ app.on("window-all-closed", async () => {
 });
 
 app.on("activate", () => {
-  dbInit();
   if (mainWindow === null) {
     createWindow();
   }
 });
-
-// fs.readdir(os.homedir(), (err, result) => {
-//   if (err) return console.error(err.message);
-//   if (!result.includes("pwdata.db")) {
-//     fs.mkdir(path.join(os.homedir(), "pwdata.db"), (err) => {
-//       if (err) console.error(err.message);
-//     });
-//   }
-// });
 
 ipcMain.handle("encrypt", async (e, data) => {
   try {
@@ -81,7 +74,20 @@ ipcMain.handle("encrypt", async (e, data) => {
 });
 
 ipcMain.handle("decrypt", async (e, password) => {
-  const result = await decrypt(password);
-  console.log(result);
-  return result;
+  try {
+    const result = await decrypt(password);
+    if (!result) return "no data";
+    return result;
+  } catch (e) {
+    return e;
+  }
+});
+
+ipcMain.handle("delete", async (e, id) => {
+  try {
+    await deletePost(id);
+    return "ok";
+  } catch (e) {
+    return e;
+  }
 });
