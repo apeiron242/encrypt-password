@@ -16,7 +16,7 @@ const HowTo: React.FC = () => {
           <li>It will encrypt the username and the password</li>
           <li>
             When the data is encrypted, it's stored in to your local computer by
-            Sqlite3
+            SQLite3
           </li>
           <li>
             So unless your password for this app is exposed, it is impossible to
