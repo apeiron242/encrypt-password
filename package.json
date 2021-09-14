@@ -5,7 +5,7 @@
     "name": "apeiron242",
     "email": "apeiron242@gmail.com"
   },
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@electron/remote": "^1.2.1",
@@ -87,6 +87,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apeiron242/encrypt-password"
+    "url": "https://github.com/apeiron242/encrypt-password.git"
   }
 }
