@@ -36,8 +36,7 @@
     "publish": [{
       "provider": "github",
       "owner": "apeiron242",
-      "repo": "encrypt-password",
-      "token": "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"
+      "repo": "encrypt-password"
     }]
   },
   "main": "public/electron.js",
