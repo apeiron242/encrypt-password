@@ -10,7 +10,7 @@ This app enables you to encrypt your username and password data and save it to y
 - When the data is encrypted, it's stored in to your local computer
 - So unless your password for this app is exposed, it is impossible to decrypt the information you've stored
 - Also, your password for this app isn't stored in the database
-- This app uses SHA256 algorithm to hash your password for this app, and AES for encrypting you information
+- This app uses SHA256 algorithm to hash your password for this app, and AES for encrypting your information
 
 ## How to use this app?
 
