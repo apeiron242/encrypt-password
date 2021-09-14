@@ -53,8 +53,8 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  createWindow();
   autoUpdater.checkForUpdatesAndNotify();
+  createWindow();
 });
 
 // Quit when all windows are closed.
@@ -97,20 +97,7 @@ autoUpdater.on("download-progress", (progressObj) => {
   sendStatusToWindow(log_message);
 });
 autoUpdater.on("update-downloaded", (info) => {
-  sendStatusToWindow("Update downloaded");
-
-  const option = {
-    type: "question",
-    buttons: ["Update", "Cancel"],
-    defaultId: 0,
-    title: "electron-updater",
-    message: "There is a new update. Do you want to download it?",
-  };
-  let btnIndex = dialog.showMessageBoxSync(mainWindow, option);
-
-  if (btnIndex === 0) {
-    autoUpdater.quitAndInstall();
-  }
+  autoUpdater.quitAndInstall();
 });
 
 ipcMain.handle("encrypt", async (e, data) => {
