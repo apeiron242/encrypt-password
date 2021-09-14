@@ -24,7 +24,7 @@ const HowTo: React.FC = () => {
           <li>Also, your password for this app isn't stored in the database</li>
           <li>
             This app uses SHA256 algorithm to hash your password for this app,
-            and AES for encrypting you information
+            and AES for encrypting your information
           </li>
         </ol>
       </div>
