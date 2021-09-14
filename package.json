@@ -26,6 +26,7 @@
     "web-vitals": "^1.0.1"
   },
   "build": {
+    "appId": "com.github.apeiron242.encryptpassword",
     "productName": "Encrypt Password",
     "win": {
       "icon": "./build/assets/icon.png"
