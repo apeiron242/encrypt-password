@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# Encrypt Password
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app enables you to encrypt your username and password data and save it to your local computer
 
-## Available Scripts
+## How does it work?
 
-In the project directory, you can run:
+- This app generates hash of the password which you use for this app
+- And, it **uses the hash to encrypt the information** that you want to store
+- It will encrypt the username and the password
+- When the data is encrypted, it's stored in to your local computer
+- So unless your password for this app is exposed, it is impossible to decrypt the information you've stored
+- Also, your password for this app isn't stored in the database
+- This app uses SHA256 algorithm to hash your password for this app, and AES for encrypting you information
 
-### `yarn start`
+## How to use this app?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Download the app from [Here](https://github.com/apeiron242/encrypt-password/releases)
+- Make a password for this app
+- Write a new data with required information
+- You can have various password for this app, but if the password is not equal to the one which you used to encrypt, the data wouldn't be decrypted
