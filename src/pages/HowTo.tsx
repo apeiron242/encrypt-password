@@ -10,8 +10,8 @@ const HowTo: React.FC = () => {
             This app generates hash of the password which you use for this app
           </li>
           <li>
-            And, it uses the hash to encrypt the information that you want to
-            store
+            And, it uses the hash of the password to encrypt the information
+            that you want to store
           </li>
           <li>It will encrypt the username and the password</li>
           <li>
