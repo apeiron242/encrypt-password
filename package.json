@@ -1,5 +1,10 @@
 {
   "name": "encrypt-password",
+  "description": "App to securely store your password",
+  "author": {
+    "name": "apeiron242",
+    "email": "apeiron242@gmail.com"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
