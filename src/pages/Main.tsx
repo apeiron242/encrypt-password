@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import GetPassword from "../components/GetPassword";
 import NewPassword from "../components/NewPassword";
 import ViewPMList from "../components/ViewPMList";
@@ -13,6 +13,8 @@ const Main: React.FC = () => {
   const [newId, setNewId] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [data, setData] = useState<DataInterface[]>();
+  const [finalData, setFinalData] = useState<DataInterface[]>();
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   const viewNewPasswordRef = useRef<HTMLDivElement>(null);
   const viewPMListRef = useRef<HTMLDivElement>(null);
@@ -86,6 +88,17 @@ const Main: React.FC = () => {
     viewPMListBtnRef.current?.classList.toggle("button-active");
   };
 
+  useEffect(() => {
+    setFinalData(data);
+    if (searchKeyword) {
+      setFinalData(
+        data?.filter((elem) =>
+          elem.sitename.toLowerCase().includes(searchKeyword.toLowerCase())
+        )
+      );
+    }
+  }, [searchKeyword, data]);
+
   return (
     <div className="Main">
       <main>
@@ -111,9 +124,17 @@ const Main: React.FC = () => {
           </div>
           <div ref={viewPMListRef} className="hidden">
             {data && data.length > 0 ? (
-              data.map((elem) => (
-                <ViewPMList data={elem} setData={setData} key={elem.id} />
-              ))
+              <div className="pm-list">
+                <input
+                  type="text"
+                  placeholder="Search Data"
+                  onChange={(e) => setSearchKeyword(e.target.value)}
+                  className="search-input"
+                />
+                {finalData?.map((elem) => (
+                  <ViewPMList data={elem} setData={setData} key={elem.id} />
+                ))}
+              </div>
             ) : (
               <h3 className="info">No Data</h3>
             )}

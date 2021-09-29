@@ -214,3 +214,14 @@ form {
     }
   }
 }
+
+.pm-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    margin-bottom: $base-padding-md;
+    padding-left: 0.5rem;
+  }
+}

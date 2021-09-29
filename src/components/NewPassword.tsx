@@ -42,7 +42,7 @@ const NewPassword: React.FC<Props> = ({
         />
         <label htmlFor="">Password</label>
         <input
-          type="password"
+          type="text"
           placeholder="Password"
           required
           ref={inputRef3}
